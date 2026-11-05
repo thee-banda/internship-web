@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router' // นำเข้า useRouter สำหรับเปลี่ยนหน้า
 import { mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js'
+
+const router = useRouter() // เรียกใช้งาน router
 
 const form = ref(null)
 const account = ref('')
@@ -8,12 +11,11 @@ const password = ref('')
 const showPassword = ref(false)
 const remember = ref(false)
 const helpDialog = ref(null)
-const prototypeNotice = ref(false)
 const required = (value) => Boolean(value?.trim()) || 'กรุณากรอกข้อมูลในช่องนี้'
 
-async function submit() {
-  const { valid } = await form.value.validate()
-  prototypeNotice.value = valid
+function submit() {
+  // ข้ามการตรวจสอบเงื่อนไข กดแล้วไปหน้า Today ทันที
+  router.push('/today')
 }
 
 function openHelp(kind) {
@@ -35,7 +37,7 @@ function openHelp(kind) {
           <p>เข้าสู่ระบบเพื่อดูงาน ลงเวลา และติดตาม<br class="mobile-break" />ความคืบหน้าการฝึกงานของคุณ</p>
         </div>
 
-        <v-form ref="form" validate-on="submit" @submit.prevent="submit">
+        <v-form ref="form" @submit.prevent="submit">
           <div class="credential-field">
             <label for="account">อีเมลหรือรหัสนักศึกษา</label>
             <v-text-field
@@ -49,7 +51,6 @@ function openHelp(kind) {
               spellcheck="false"
               autocapitalize="none"
               required
-              @update:model-value="prototypeNotice = false"
             />
           </div>
 
@@ -65,7 +66,6 @@ function openHelp(kind) {
               :rules="[required]"
               hide-details="auto"
               required
-              @update:model-value="prototypeNotice = false"
             >
               <template #append-inner>
                 <v-btn
@@ -99,18 +99,6 @@ function openHelp(kind) {
           <v-btn block color="primary" type="submit" height="44" class="login-submit">
             เข้าสู่ระบบ
           </v-btn>
-
-          <v-alert
-            v-if="prototypeNotice"
-            class="prototype-notice"
-            variant="tonal"
-            color="primary"
-            :icon="false"
-            role="status"
-            aria-live="polite"
-          >
-            หน้านี้เป็นต้นแบบ ยังไม่เชื่อมต่อระบบเข้าสู่ระบบ
-          </v-alert>
         </v-form>
       </v-card>
 
