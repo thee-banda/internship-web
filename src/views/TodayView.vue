@@ -5,9 +5,9 @@
         
         <!-- ส่วนหัว: วันนี้ของคุณ -->
         <div class="mb-4">
-          <v-btn :to="{ name: 'login' }" variant="text" size="small" class="mb-2 px-0">กลับหน้าเข้าสู่ระบบ</v-btn>
+          <LogoutButton class="mb-2" />
           <h1 class="text-h5 font-weight-bold text-grey-darken-4">วันนี้ของคุณ</h1>
-          <p class="text-subtitle-2 text-grey-darken-1">นภัส • ฝึกงานสัปดาห์ที่ 8 / 16</p>
+          <p class="text-subtitle-2 text-grey-darken-1">{{ authUser?.name }} • ฝึกงานสัปดาห์ที่ 8 / 16</p>
           <p class="text-body-2 font-weight-medium text-grey-darken-3 mt-1">พฤหัสบดี 29 ต.ค. 2569</p>
         </div>
 
@@ -122,6 +122,8 @@
 
 <script setup>
 import { ref } from 'vue'
+import { authUser } from '../auth'
+import LogoutButton from '../components/LogoutButton.vue'
 import {
   mdiAlertCircle,
   mdiChevronRight,

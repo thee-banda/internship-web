@@ -39,8 +39,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid #262626; outline-offs
 .credential-field .v-field__input { min-height: 48px; padding-top: 12px; padding-bottom: 12px; }
 .credential-field .v-field__outline { --v-field-border-opacity: .28; }
 .credential-field input::placeholder { color: #8a8a8a; opacity: 1; }
-.password-toggle { margin-inline-end: -6px; }
-.password-toggle .v-icon { width: 19px; height: 19px; }
 .login-options { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 16px 0; }
 .login-options .v-checkbox { flex: 0 1 auto; min-width: 0; }
 .login-options .v-selection-control { min-height: 44px; }
@@ -49,7 +47,14 @@ button:focus-visible, a:focus-visible { outline: 2px solid #262626; outline-offs
 .text-action { flex-shrink: 0; min-height: 44px; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 12px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 .v-btn { letter-spacing: 0; font-size: 13px; font-weight: 600; text-transform: none; }
 .login-submit { justify-content: flex-start; }
-.prototype-notice { margin-top: 16px; font-size: 13px; line-height: 1.75; }
+.login-error { font-size: 13px; line-height: 1.75; }
+.demo-accounts { margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e5e5; }
+.demo-accounts h2 { font-size: 14px; line-height: 1.6; font-weight: 600; }
+.demo-accounts p { margin-top: 4px; font-size: 12px; color: #737373; }
+.demo-accounts dl { margin: 12px 0 0; font-size: 13px; }
+.demo-accounts dl > div { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; }
+.demo-accounts dd { margin: 0; }
+.demo-accounts code { font-size: 13px; }
 .account-assistance { margin-top: 32px; }
 .account-assistance h2 { font-size: 14px; line-height: 1.6; font-weight: 600; }
 .account-assistance p { margin: 10px 0 16px; color: #737373; font-size: 13px; line-height: 1.8; }

@@ -1,9 +1,12 @@
 <template>
-  <v-app class="bg-grey-lighten-4">
+  <div class="admin-page bg-grey-lighten-4">
     <!-- Navigation Drawer (Sidebar) -->
-    <v-navigation-drawer v-model="drawer" permanent width="280" class="border-e">
+    <v-navigation-drawer v-model="drawer" :permanent="mdAndUp" :temporary="!mdAndUp" width="280" class="border-e" aria-label="เมนูอาจารย์">
       <div class="pa-6">
-        <h2 class="text-h6 font-weight-bold">ฝึกงาน</h2>
+        <div class="d-flex align-center justify-space-between">
+          <h2 class="text-h6 font-weight-bold">ฝึกงาน</h2>
+          <v-btn v-if="!mdAndUp" :icon="mdiClose" variant="text" size="small" aria-label="ปิดเมนูอาจารย์" @click="drawer = false" />
+        </div>
         <p class="text-caption text-grey-darken-1">พื้นที่สำหรับผู้ดูแล</p>
       </div>
 
@@ -23,18 +26,22 @@
 
       <template v-slot:append>
         <div class="pa-4 border-t">
-          <div class="font-weight-bold text-subtitle-2">อ.กมล • ผู้ดูแล</div>
+          <div class="font-weight-bold text-subtitle-2">{{ authUser?.name }} • อาจารย์</div>
           <div class="text-caption text-grey">ภาคเรียน 2 / 2569</div>
+          <LogoutButton class="mt-3" />
         </div>
       </template>
     </v-navigation-drawer>
 
     <!-- Main Content -->
-    <v-main>
-      <v-container fluid class="pa-8">
+      <v-container fluid class="admin-content">
         
         <!-- Header Section -->
         <div class="mb-6">
+          <div v-if="!mdAndUp" class="d-flex align-center justify-space-between mb-4">
+            <v-btn :prepend-icon="mdiMenu" variant="outlined" aria-label="เปิดเมนูอาจารย์" :aria-expanded="drawer" @click="drawer = !drawer">เมนู</v-btn>
+            <LogoutButton />
+          </div>
           <h1 class="text-h4 font-weight-bold mb-1">ภาพรวมการฝึกงาน</h1>
           <p class="text-body-2 text-grey-darken-1">
             29 ตุลาคม 2569 • ข้อมูลตัวอย่างสำหรับทดสอบ
@@ -73,7 +80,7 @@
 
         <!-- Students Table Section -->
         <v-card flat border class="mb-6 rounded-lg">
-          <div class="d-flex justify-space-between align-center pa-4 border-b">
+          <div class="d-flex flex-wrap ga-3 justify-space-between align-center pa-4 border-b">
             <h3 class="text-h6 font-weight-bold">นักศึกษาที่รับผิดชอบ</h3>
             <v-btn variant="outlined" density="comfortable" class="text-none" rounded="lg">
               คำขอแก้ไขเวลา (1)
@@ -120,7 +127,7 @@
         </v-card>
 
         <!-- Upcoming Meeting Card -->
-        <v-card flat border class="pa-5 rounded-lg d-flex justify-space-between align-center">
+        <v-card flat border class="pa-5 rounded-lg d-flex flex-wrap ga-4 justify-space-between align-center">
           <div>
             <div class="text-subtitle-1 font-weight-bold mb-1">
               ประชุมถัดไป • วันนี้ 10:00–10:30 น.
@@ -135,14 +142,19 @@
         </v-card>
 
       </v-container>
-    </v-main>
-  </v-app>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useDisplay } from 'vuetify'
+import { mdiClose, mdiMenu } from '@mdi/js'
+import { authUser } from '../auth'
+import LogoutButton from '../components/LogoutButton.vue'
 
-const drawer = ref(true)
+const { mdAndUp } = useDisplay()
+const drawer = ref(mdAndUp.value)
+watch(mdAndUp, (desktop) => { drawer.value = desktop })
 const selectedMenu = ref('ภาพรวม')
 
 const menuItems = [
@@ -186,5 +198,11 @@ const viewDetail = (student) => {
 </script>
 
 <style scoped>
-/* ปรับแต่งเพิ่มเติมตามความเหมาะสม */
+.admin-page { min-height: 100svh; min-width: 0; }
+.admin-content { padding: 32px; }
+.admin-content :deep(.v-table table) { min-width: 720px; }
+@media (max-width: 959px) {
+  .admin-content { padding: 20px 16px; }
+  .admin-content h1 { font-size: 26px !important; }
+}
 </style>

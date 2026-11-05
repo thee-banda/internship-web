@@ -12,6 +12,8 @@ import './styles.css'
 import App from './App.vue'
 import LoginView from './views/LoginView.vue'
 import TodayView from './views/TodayView.vue'
+import AdminView from './views/AdminView.vue'
+import { authError, homeRoute, refreshSession } from './auth'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -19,9 +21,24 @@ const router = createRouter({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', name: 'login', component: LoginView, meta: { title: 'เข้าสู่ระบบ' } },
-    { path: '/today', name: 'today', component: TodayView, meta: { title: 'วันนี้ของคุณ' } },
+    { path: '/today', name: 'today', component: TodayView, meta: { title: 'วันนี้ของคุณ', role: 'student' } },
+    { path: '/admin', name: 'admin', component: AdminView, meta: { title: 'ภาพรวมการฝึกงาน', role: 'teacher' } },
     { path: '/:pathMatch(.*)*', redirect: '/login' },
   ],
+})
+
+router.beforeEach(async (to) => {
+  let user
+  try {
+    user = await refreshSession()
+  } catch (error) {
+    authError.value = error.message
+    return to.name === 'login' ? true : { name: 'login' }
+  }
+  if (to.meta.role && !user) return { name: 'login' }
+  if (user && (to.name === 'login' || (to.meta.role && to.meta.role !== user.role))) {
+    return homeRoute(user)
+  }
 })
 
 router.afterEach((to) => {
