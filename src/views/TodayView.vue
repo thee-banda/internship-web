@@ -1,11 +1,11 @@
 <template>
-  <v-app class="bg-grey-lighten-4">
+  <div class="today-page bg-grey-lighten-4">
     <!-- Main Content Container -->
-    <v-main class="pb-16">
       <v-container class="px-4 py-6 max-w-md">
         
         <!-- ส่วนหัว: วันนี้ของคุณ -->
         <div class="mb-4">
+          <v-btn :to="{ name: 'login' }" variant="text" size="small" class="mb-2 px-0">กลับหน้าเข้าสู่ระบบ</v-btn>
           <h1 class="text-h5 font-weight-bold text-grey-darken-4">วันนี้ของคุณ</h1>
           <p class="text-subtitle-2 text-grey-darken-1">นภัส • ฝึกงานสัปดาห์ที่ 8 / 16</p>
           <p class="text-body-2 font-weight-medium text-grey-darken-3 mt-1">พฤหัสบดี 29 ต.ค. 2569</p>
@@ -33,7 +33,7 @@
         <!-- 2. การ์ดงาน: รายงานสัปดาห์ที่ 7 (เกินกำหนด) -->
         <v-card class="mb-4 rounded-xl pa-4 border-s-lg" border="error" elevation="1">
           <div class="d-flex align-center text-error font-weight-bold mb-1">
-            <v-icon icon="mdi-alert-circle" size="small" class="me-1"></v-icon>
+            <v-icon :icon="mdiAlertCircle" size="small" class="me-1"></v-icon>
             รายงานสัปดาห์ที่ 7
           </div>
           <p class="text-body-2 text-grey-darken-1 mb-3">เกินกำหนด 1 วัน • ส่ง 28 ต.ค. 2569</p>
@@ -75,53 +75,62 @@
         <v-card class="mb-4 rounded-xl pa-4 cursor-pointer" elevation="1" @click="goToNotifications">
           <div class="d-flex justify-space-between align-center">
             <span class="text-subtitle-1 font-weight-bold text-grey-darken-4">การแจ้งเตือน 3 รายการ</span>
-            <v-icon icon="mdi-chevron-right" color="grey-darken-1"></v-icon>
+            <v-icon :icon="mdiChevronRight" color="grey-darken-1"></v-icon>
           </div>
         </v-card>
 
       </v-container>
-    </v-main>
 
     <!-- Bottom Navigation Bar -->
     <v-bottom-navigation
       v-model="activeTab"
       grow
       bg-color="white"
-      class="border-t"
+      class="border-t today-navigation"
       elevation="3"
-      fixed
+      tag="nav"
+      aria-label="เมนูหลัก"
     >
       <v-btn value="today" class="text-grey-darken-4 font-weight-bold">
-        <v-icon icon="mdi-calendar-today"></v-icon>
+        <v-icon :icon="mdiCalendarToday"></v-icon>
         <span>วันนี้</span>
       </v-btn>
 
       <v-btn value="tasks" class="text-grey" @click="changeTab('tasks')">
-        <v-icon icon="mdi-clipboard-text-outline"></v-icon>
+        <v-icon :icon="mdiClipboardTextOutline"></v-icon>
         <span>งาน</span>
       </v-btn>
 
       <v-btn value="calendar" class="text-grey" @click="changeTab('calendar')">
-        <v-icon icon="mdi-calendar-blank-outline"></v-icon>
+        <v-icon :icon="mdiCalendarBlankOutline"></v-icon>
         <span>ปฏิทิน</span>
       </v-btn>
 
       <v-btn value="time" class="text-grey" @click="changeTab('time')">
-        <v-icon icon="mdi-clock-outline"></v-icon>
+        <v-icon :icon="mdiClockOutline"></v-icon>
         <span>เวลา</span>
       </v-btn>
 
       <v-btn value="notes" class="text-grey" @click="changeTab('notes')">
-        <v-icon icon="mdi-bookmark-outline"></v-icon>
+        <v-icon :icon="mdiBookmarkOutline"></v-icon>
         <span>บันทึก</span>
       </v-btn>
     </v-bottom-navigation>
 
-  </v-app>
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import {
+  mdiAlertCircle,
+  mdiChevronRight,
+  mdiCalendarToday,
+  mdiClipboardTextOutline,
+  mdiCalendarBlankOutline,
+  mdiClockOutline,
+  mdiBookmarkOutline,
+} from '@mdi/js'
 
 // สถานะแท็บด้านล่าง
 const activeTab = ref('today')
@@ -154,6 +163,17 @@ const changeTab = (tabName) => {
 </script>
 
 <style scoped>
+.today-page {
+  min-height: calc(100svh - 56px);
+  padding-bottom: 16px;
+}
+
+.today-navigation {
+  max-width: 440px;
+  margin-inline: auto;
+  right: 0;
+}
+
 /* กำหนดขนาดหน้าจอจำลองแบบ Mobile View ให้แสดงผลพอดีสวยงาม */
 .max-w-md {
   max-width: 440px;

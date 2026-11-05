@@ -11,14 +11,21 @@ import '@fontsource/noto-sans-thai/700.css'
 import './styles.css'
 import App from './App.vue'
 import LoginView from './views/LoginView.vue'
+import TodayView from './views/TodayView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior: () => ({ top: 0 }),
   routes: [
     { path: '/', redirect: '/login' },
-    { path: '/login', name: 'login', component: LoginView },
+    { path: '/login', name: 'login', component: LoginView, meta: { title: 'เข้าสู่ระบบ' } },
+    { path: '/today', name: 'today', component: TodayView, meta: { title: 'วันนี้ของคุณ' } },
     { path: '/:pathMatch(.*)*', redirect: '/login' },
   ],
+})
+
+router.afterEach((to) => {
+  document.title = `${to.meta.title || 'ระบบจัดการฝึกงาน'} · ระบบจัดการฝึกงาน`
 })
 
 const vuetify = createVuetify({
