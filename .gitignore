@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.idea/
+.vscode/
+coverage/
+playwright-report/
+test-results/
+*.pem
+*.key
+credentials*.json
+work/

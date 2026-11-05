@@ -1,0 +1,29 @@
+{
+  "name": "internship-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "หน้าเข้าสู่ระบบต้นแบบสำหรับระบบจัดการฝึกงาน ด้วย Vue, Vuetify และ Express",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail --names web,api \"vite --host 127.0.0.1 --port 5173 --strictPort\" \"node --watch server/index.js\"",
+    "build": "vite build",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "@fontsource/noto-sans-thai": "^5.3.0",
+    "@mdi/js": "^7.4.47",
+    "express": "^5.3.0",
+    "vue": "^3.5.44",
+    "vue-router": "^4.6.4",
+    "vuetify": "^4.3.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.10",
+    "concurrently": "^10.0.6",
+    "vite": "^8.3.5",
+    "vite-plugin-vuetify": "^2.1.3"
+  }
+}

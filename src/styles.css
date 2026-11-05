@@ -1,0 +1,70 @@
+:root {
+  font-family: 'Noto Sans Thai', sans-serif;
+  color: #262626;
+  background: #fafafa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-y: auto; }
+body { margin: 0; min-width: 320px; }
+h1, h2, p { margin: 0; }
+button, input, .v-application { font-family: 'Noto Sans Thai', sans-serif; }
+button, a, input { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible { outline: 2px solid #262626; outline-offset: 4px; }
+
+.login-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 44px 20px 24px;
+}
+.login-content { flex: 1; }
+.page-heading { margin-bottom: 32px; }
+.page-heading h1 { font-size: 24px; line-height: 1.4; font-weight: 700; }
+.page-heading p { margin-top: 6px; color: #737373; font-size: 13px; line-height: 1.6; }
+.login-card { padding: 20px 16px 16px; border-color: #dedede !important; background: #fff; }
+.welcome { margin-bottom: 26px; }
+.welcome h2 { font-size: 18px; line-height: 1.5; font-weight: 600; }
+.welcome p { margin-top: 8px; color: #737373; font-size: 13px; line-height: 1.75; }
+.credential-field + .credential-field { margin-top: 20px; }
+.credential-field > label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 500; line-height: 1.6; }
+.credential-field .v-field { border-radius: 4px; font-size: 14px; }
+.credential-field .v-field__input { min-height: 48px; padding-top: 12px; padding-bottom: 12px; }
+.credential-field .v-field__outline { --v-field-border-opacity: .28; }
+.credential-field input::placeholder { color: #8a8a8a; opacity: 1; }
+.password-toggle { margin-inline-end: -6px; }
+.password-toggle .v-icon { width: 19px; height: 19px; }
+.login-options { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 16px 0; }
+.login-options .v-checkbox { flex: 0 1 auto; min-width: 0; }
+.login-options .v-selection-control { min-height: 44px; }
+.login-options .v-label { opacity: 1; font-size: 12px; white-space: nowrap; }
+.login-options .v-selection-control__wrapper { margin-inline-start: -9px; }
+.text-action { flex-shrink: 0; min-height: 44px; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 12px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+.v-btn { letter-spacing: 0; font-size: 13px; font-weight: 600; text-transform: none; }
+.login-submit { justify-content: flex-start; }
+.prototype-notice { margin-top: 16px; font-size: 13px; line-height: 1.75; }
+.account-assistance { margin-top: 32px; }
+.account-assistance h2 { font-size: 14px; line-height: 1.6; font-weight: 600; }
+.account-assistance p { margin: 10px 0 16px; color: #737373; font-size: 13px; line-height: 1.8; }
+.account-assistance .v-btn { border-color: #bdbdbd; justify-content: flex-start; }
+.privacy-footer { margin-top: 60px; padding-top: 14px; border-top: 1px solid #e5e5e5; }
+.privacy-footer p { color: #737373; font-size: 11px; line-height: 1.7; }
+.help-card { padding: 24px; }
+.help-card h2 { font-size: 18px; font-weight: 600; line-height: 1.6; }
+.help-card p { margin: 12px 0 24px; font-size: 14px; color: #616161; line-height: 1.8; }
+
+@media (min-width: 600px) {
+  .login-shell { padding-top: 64px; padding-bottom: 28px; }
+  .mobile-break { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
